@@ -25,49 +25,21 @@
 </template>
 
 <script>
-
-import SignupForm from './SignUpForm'
-import RestorePassword from './RestorePassword'
 import { login } from './../utils/services.js'
 export default {
   name: 'LoginForm',
   props: ['logo'],
-  components: {
-    SignupForm,
-    RestorePassword
-  },
   data () {
     return {
       // Login data
       form: {
         email: '',
         password: ''
-      },
-      // SignUp
-      showSignup: false,
-      showRestore: false,
-      errorModal: false
+      }
     }
   },
   methods: {
-    presentAlert () {
-      return this.$ionic.alertController
-        .create({
-          header: 'Alert',
-          subHeader: 'Subtitle',
-          message: 'This is an alert message.',
-          buttons: ['OK']
-        })
-        .then(a => a.present())
-    },
-    toggleSingUp () {
-      this.showSignup = !this.showSignup
-    },
-    toggleRestore () {
-      this.showRestore = !this.showRestore
-    },
     loginIn () {
-      // this.form.img = this.$refs.uploadImage.file
       console.log('Submitting form', this.form)
       this.isLoading = true
       let data = new FormData()
