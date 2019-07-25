@@ -1,8 +1,8 @@
 <template>
 <ion-app>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Inicio de sesión</ion-card-title>
+    <ion-card-header class="header-card">
+      <ion-card-title class="header-title">Inicio de sesión</ion-card-title>
     </ion-card-header>
       <!--<img v-if="logo" class="logo" src="@/assets/logo.png"/>-->
         <ion-item>
@@ -52,6 +52,7 @@ export default {
         let r = response.data
         if (r.code === 1) {
           this.$router.push('Prueba')
+          window.location.reload()
         } else {
           this.errorModal = true
           return this.$ionic.alertController
@@ -85,8 +86,14 @@ export default {
   }
   .logo{
    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;
+   margin-left: auto;
+   margin-right: auto;
+   width: 30%;
+  }
+  .header-card{
+   background: #1976D2;
+  }
+  .header-title{
+   color: white;
   }
 </style>
