@@ -1,29 +1,35 @@
 # ltmt_mobile
 
+#### Framework docs: https://www.npmjs.com/package/vue-cli-plugin-cordova
+
 ## Project setup
+```
+npm install -g cordova # If cordova is not already installed
+```
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run cordova-prepare # prepare for build (you can run this command, when you checkouted your project from GIT, it's like npm install)
 ```
 
-### Compiles and minifies for production
+### Android
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+npm run cordova-serve-android # Development Android 
+npm run cordova-build-android # Build Android 
+npm run cordova-build-only-www-android # Build only files to src-cordova 
 ```
 
-### Lints and fixes files
+### iOS
 ```
-npm run lint
+npm run cordova-serve-ios # Development IOS
+npm run cordova-build-ios # Build IOS
+npm run cordova-build-only-www-ios # Build only files to src-cordova
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Browser
+```
+npm run cordova-serve-browser # Development Browser
+npm run cordova-build-browser # Build Browser
+npm run cordova-build-only-www-browser # Build only files to src-cordov
+```
