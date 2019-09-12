@@ -12,6 +12,9 @@ npm install
 ```
 npm run cordova-prepare # prepare for build (you can run this command, when you checkouted your project from GIT, it's like npm install)
 ```
+```
+npm run cordova-prepare # prepare for build (you can run this command, when you checkouted your project from GIT, it's like npm install)
+```
 
 ### Android
 ```
