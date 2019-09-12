@@ -9,6 +9,9 @@ npm install
 ```
 npm run serve
 ```
+```
+npm run cordova-prepare # prepare for build (you can run this command, when you checkouted your project from GIT, it's like npm install)
+```
 
 ### Compiles and minifies for production
 ```
