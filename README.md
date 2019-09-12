@@ -3,11 +3,14 @@
 ## Project setup
 ```
 npm install
+<<<<<<< HEAD
 ```
 
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+=======
+>>>>>>> parent of 5954efae... Setup documentatio
 ```
 
 ### Compiles and hot-reloads for development
