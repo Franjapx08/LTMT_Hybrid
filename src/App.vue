@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div id="app">
     <div id="nav">
       <router-link to="/">Homex</router-link> |
@@ -6,24 +7,16 @@
     </div>
     <router-view/>
   </div>
+=======
+  <router-view />
+>>>>>>> d3cd4c7bc69bce2c53790c5aff36e61450b5226f
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<script>
+export default {
+  name: "App",
+  data: () => ({
+    //
+  })
+};
+</script>
