@@ -29,20 +29,36 @@
 </template>
 
 <script>
+import { login } from '../utils/services'
 export default {
   name: 'App',
   data: () => ({
     email: '',
     password: '',
     showPassword: false,
-    disableInputs: false
+    disableInputs: false,
+    uuid: null,
+    model: null
   }),
+  created () {
+    // eslint-disable-next-line
+    this.model = device.model
+    // eslint-disable-next-line
+    this.uuid = device.uuid
+  },
   methods: {
     login () {
       this.disableInputs = true
-      setTimeout(() => {
+      let data = new FormData()
+      data.append('email', this.email)
+      data.append('password', this.password)
+      data.append('uuid', this.uuid)
+      data.append('model', this.model)
+      login(data).then(response => {
+        // eslint-disable-next-line
+        console.log(response)
         this.disableInputs = false
-      }, 1000);
+      })
     }
   }
 };

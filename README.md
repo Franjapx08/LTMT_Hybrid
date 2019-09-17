@@ -2,6 +2,16 @@
 
 #### Framework docs: https://www.npmjs.com/package/vue-cli-plugin-cordova
 
+## LOCAL DEVELOPMENT tutorial
+### Use HTTPS
+https://shellcreeper.com/how-to-create-valid-ssl-in-localhost-for-xampp/
+
+### Replace the serverURL const with the ip of your pc on localhost
+##### ./src/utils/config.js
+```
+    export const serverURL = 'https://Your_IP/'
+```
+
 ## Project setup
 ```
 npm install -g cordova # If cordova is not already installed
