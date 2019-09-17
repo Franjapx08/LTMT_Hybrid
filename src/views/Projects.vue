@@ -111,7 +111,8 @@ export default {
               localStorage.setItem('projectId', response.data.data.id_Project)
               this.$store.commit('setProjectId', response.data.data.id_Project)
             }
-            this.$router.replace({ path: 'project', query: { id: response.data.data.id_Project } })
+            this.loading = false
+            /* this.$router.replace({ path: 'project', query: { id: response.data.data.id_Project } }) */
           }
         // eslint-disable-next-line
         }).catch(error => {

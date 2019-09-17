@@ -1,11 +1,24 @@
 <template>
-  <div> PROJECT </div>
+  <div id="project-container">
+    <template v-for="(lay, layIndex) in LayerHierarchy">
+      <Visual-Object
+        v-if="lay.level === 0"
+        class="layer-container"
+        :identifier="layIndex"
+        :key="'vObj#' +  layIndex"/>
+    </template>
+  </div>
 </template>
 
 <script>
 import { getProject } from '../utils/services'
+import VisualObject from '../components/editor/VisualObject'
+import { serverURL } from '../utils/config'
 export default {
   name: 'Project',
+  components: {
+    VisualObject
+  },
   computed: {
     userData () {
       return this.$store.state.userData
@@ -27,7 +40,12 @@ export default {
     data.append('user_id', this.userData.id)
     getProject(data).then(response => {
       if (response.data.code === 1) {
-        const dataSet = JSON.parse(response.data.data.data)
+        let dataSet = JSON.parse(response.data.data.data)
+        for( const key in dataSet[0]) {
+          dataSet[0][key].properties.backgroundImage.value = dataSet[0][key].properties.backgroundImage.value.replace('http://www.localhost:81/', serverURL)
+        }
+        // eslint-disable-next-line
+        console.log(dataSet[0])
         /* 0 = Layers | 1 = Layer Hierarchy */
         this.$store.dispatch('updateProject', {
           projectId: this.projectId,
@@ -44,6 +62,10 @@ export default {
   }
 }
 </script>
-
-<style>
+<style lang="scss">
+  #project-container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+  }
 </style>
