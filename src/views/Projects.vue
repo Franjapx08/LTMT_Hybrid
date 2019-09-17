@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { isAuth, getProjects, setProjectToPhone } from '../utils/services'
+import { isAuth, getProjects, setProjectToPhone, phoneHasProject } from '../utils/services'
 export default {
   name: 'Projects',
   data () {
@@ -97,11 +97,26 @@ export default {
         data.append('project_id', id)
         setProjectToPhone(data).then(response => {
           if (response.data.code === 1) {
-            this.$router.push({ path: 'project', query: { id } })
+            localStorage.setItem('projectId', id)
+            this.$store.commit('setProjectId', id)
+            this.$router.replace({ path: 'project', query: { id } })
           }
         })
       } else {
-        this.$router.push({ path: 'project', query: { id: this.projectId } })
+        let data = new FormData()
+        data.append('uuid', this.uuid)
+        phoneHasProject(data).then(response => {
+          if (response.data.code === 1) {
+            if (response.data.data.id_Project != null && response.data.data.id_Project != 'null') {
+              localStorage.setItem('projectId', response.data.data.id_Project)
+              this.$store.commit('setProjectId', response.data.data.id_Project)
+            }
+            this.$router.replace({ path: 'project', query: { id: response.data.data.id_Project } })
+          }
+        // eslint-disable-next-line
+        }).catch(error => {
+          this.$router.replace({ path: 'project', query: { id: this.projectId } })
+        } )
       }
     },
     logOut () {
