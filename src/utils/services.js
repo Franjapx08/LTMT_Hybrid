@@ -28,3 +28,11 @@ export const setProjectToPhone = (data) => {
 export const phoneHasProject = (data) => {
     return axios.post(domainApiVersion + 'PhoneHasProject.php', data)
 }
+
+export const getProject = (data) => {
+    return axios.post(domainApiVersion + 'GetProjectDataMobile.php', data)
+}
+
+/* export const getProject2 = (data) => {
+    return axios.post(domainApiVersion + 'GetProjectDataMobile.php', data)
+} */
