@@ -1,18 +1,15 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Homex</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <v-app>
     <router-view/>
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
+  components: {},
   data: () => ({
     //
-  })
+  }),
 };
 </script>
