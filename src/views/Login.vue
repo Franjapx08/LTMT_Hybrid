@@ -69,7 +69,6 @@ export default {
     password: '123',
     showPassword: false,
     disableInputs: false,
-    uuid: null,
     model: null,
     /* DIALOG */
     message: '',
@@ -78,11 +77,13 @@ export default {
     loading: true
   }),
   created () {
+    this.$store.dispatch('restoreData')
     // eslint-disable-next-line
     this.model = device.model
     // eslint-disable-next-line
-    this.uuid = device.uuid
-    if (localStorage.getItem('session')) {
+    this.$store.commit('setUUID', device.uuid)
+    // TODO: Optimize this routine
+    if (localStorage.getItem('session') != null) {
       let localUserData = JSON.parse(localStorage.getItem('session')) 
       this.$store.commit('setUserData', localUserData)
       let data = new FormData()
@@ -98,6 +99,11 @@ export default {
       })
     } else {
       this.loading = false
+    }
+  },
+  computed: {
+    uuid () {
+      return this.$store.state.uuid
     }
   },
   methods: {
