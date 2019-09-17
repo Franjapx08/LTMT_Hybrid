@@ -7,7 +7,7 @@
     </v-app-bar>
     <!-- BODY -->
     <v-content class="contenido">
-      <v-card class="login-container">
+      <v-card v-if="!loading" class="login-container">
         <v-text-field
           v-model="email"
           :disabled="disableInputs"
@@ -26,6 +26,15 @@
         ></v-text-field>
         <v-btn @click="login()" :disabled="disableInputs" :loading="disableInputs" color="primary">Login</v-btn>
       </v-card>
+      <div class="loading-container" v-else>
+        <v-progress-linear
+          class="loader"
+          color="primary"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </div>
     </v-content>
     <!-- Messages -->
     <v-dialog
@@ -51,26 +60,45 @@
 </template>
 
 <script>
-import { login } from '../utils/services'
+import { isAuth, login } from '../utils/services'
 export default {
   name: 'App',
   data: () => ({
     /* FORM */
-    email: '',
-    password: '',
+    email: 'miguelparradev@gmail.com',
+    password: '123',
     showPassword: false,
     disableInputs: false,
     uuid: null,
     model: null,
     /* DIALOG */
     message: '',
-    showDialog: ''
+    showDialog: '',
+    /* Loading */
+    loading: true
   }),
   created () {
     // eslint-disable-next-line
     this.model = device.model
     // eslint-disable-next-line
     this.uuid = device.uuid
+    if (localStorage.getItem('session')) {
+      let localUserData = JSON.parse(localStorage.getItem('session')) 
+      this.$store.commit('setUserData', localUserData)
+      let data = new FormData()
+      data.append('id', localUserData.id)
+      isAuth(data).then(response => {
+        if(response.data.code === 1) {
+          this.$router.replace('projects')
+        } else {
+          this.loading = false
+        }
+        // eslint-disable-next-line
+        console.log(response)
+      })
+    } else {
+      this.loading = false
+    }
   },
   methods: {
     login () {
@@ -83,7 +111,8 @@ export default {
       login(data).then(response => {
         // eslint-disable-next-line
         if (response.data.code === 1) {
-
+          this.$router.replace('projects')
+          localStorage.setItem('session', JSON.stringify(response.data.data))
         } else {
           this.message = response.data.message
           this.showDialog = true
@@ -117,6 +146,10 @@ export default {
         padding: 5px;
         display: flex;
         flex-direction: column;
+      }
+      .loading-container {
+        max-width: 90%;
+        margin: 0 auto;
       }
     }
   }
