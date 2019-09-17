@@ -43,6 +43,16 @@ export default new Vuex.Store({
       commit('setHierarchy', hierarchy)
       const layers = JSON.parse(localStorage.getItem('Layers'))
       commit('setLayers', layers)
+    },
+    unsetData ({ commit }) {
+      localStorage.removeItem('session')
+      commit('setUserData', null)
+      localStorage.removeItem('projectId')
+      commit('setProjectId', null)
+      localStorage.removeItem('LayerHierarchy')
+      commit('setHierarchy', null)
+      localStorage.removeItem('Layers')
+      commit('setLayers', null)
     }
   }
 })

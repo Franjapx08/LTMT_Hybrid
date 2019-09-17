@@ -105,10 +105,7 @@ export default {
       }
     },
     logOut () {
-      localStorage.removeItem('session')
-      localStorage.removeItem('projectId')
-      localStorage.removeItem('LayerHierarchy')
-      localStorage.removeItem('Layers')
+      this.$store.dispatch('unsetData')
       this.$router.replace('/')
     }
   }
