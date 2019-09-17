@@ -2,12 +2,13 @@
   <div id="login-wrapper">
     <v-app-bar color="primary" app>
       <img id="logo" src="../assets/logo.png"/>
-      <span class="title">Login</span>
+      <span class="title">Iniciar Sesión</span>
     </v-app-bar>
     <v-content class="contenido">
       <v-card class="login-container">
         <v-text-field
           v-model="email"
+          :disabled="disableInputs"
           prepend-icon="mdi-account"
           type="email"
           label="Correo Electrónico"
@@ -18,9 +19,10 @@
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             label="Contraseña"
+            :disabled="disableInputs"
             @click:append="showPassword = !showPassword"
         ></v-text-field>
-        <v-btn color="primary">Login</v-btn>
+        <v-btn @click="login()" :disabled="disableInputs" :loading="disableInputs" color="primary">Login</v-btn>
       </v-card>
     </v-content>
   </div>
@@ -32,8 +34,17 @@ export default {
   data: () => ({
     email: '',
     password: '',
-    showPassword: false
+    showPassword: false,
+    disableInputs: false
   }),
+  methods: {
+    login () {
+      this.disableInputs = true
+      setTimeout(() => {
+        this.disableInputs = false
+      }, 1000);
+    }
+  }
 };
 </script>
 
